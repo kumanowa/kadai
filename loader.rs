@@ -3,15 +3,15 @@ use std::io::{BufRead, BufReader};
 use std::collections::HashMap;
 
 fn main() {
-    // config.iniファイルを開く
-    let file = match File::open("config.ini") {
+    // input.txtファイルを開く
+    let file = match File::open("input.txt") {
         Ok(file) => file,
         Err(e) => panic!("Failed to open file: {}", e),
-    }
+    };
     let reader = BufReader::new(file);
 
     // HashMapを初期化
-    let mut config = HashMap::new();
+    let mut input_dict = HashMap::new();
 
     // ファイルを行ごとに読み込み、HashMapに格納する
     for line in reader.lines() {
@@ -22,10 +22,10 @@ fn main() {
             let key = parts[0].trim();
             let value = parts[1].trim();
 
-            config.insert(key.to_string(), value.to_string());
+            input_dict.insert(key.to_string(), value.to_string());
         }
     }
 
     // HashMapの値を表示する
-    println!("{:?}", config);
+    println!("{:?}", input_dict);
 }
