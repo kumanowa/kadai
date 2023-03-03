@@ -4,7 +4,10 @@ use std::collections::HashMap;
 
 fn main() {
     // config.iniファイルを開く
-    let file = File::open("config.ini").unwrap();
+    let file = match File::open("config.ini") {
+        Ok(file) => file,
+        Err(e) => panic!("Failed to open file: {}", e),
+    }
     let reader = BufReader::new(file);
 
     // HashMapを初期化
